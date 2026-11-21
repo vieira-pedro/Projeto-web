@@ -1,0 +1,366 @@
+@charset "utf-8";
+
+/* =====================================================================
+   ÍNDICE
+   1. Cores do site
+   2. Base da página
+   3. Títulos
+   4. Perfil
+   5. Cards (estilo base, usado em todas as seções)
+   6. Portfólio (imagens dos projetos)
+   7. Habilidades
+   8. Contato (localização + formulário)
+   9. Rodapé
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. CORES DO SITE
+   ===================================================================== */
+:root {
+    --cor-background: #dee3f8;     /* fundo da página */
+    --cor-titulo: #0B1F5C;         /* títulos das seções */
+    --cor-nome: #0066FF;           /* destaque azul (nome, faixa dos cards, botão) */
+    --cor-borda-perfil: #0066FF;   /* borda da foto de perfil */
+    --cor-texto: #5B6783;          /* texto geral */
+    --cor-card-fundo: #FFFFFF;     /* fundo dos cards */
+    --cor-card-texto: #0B1F5C;     /* títulos dentro dos cards */
+    --cor-card-p: #5B6783;         /* parágrafos dentro dos cards */
+    --cor-card-border: #E3E8F5;    /* borda suave dos cards */
+}
+
+
+/* =====================================================================
+   2. BASE DA PÁGINA
+   ===================================================================== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;                /* centraliza o conteúdo */
+    padding: 20px;
+    max-width: 1400px;             /* largura máxima em telas grandes */
+    background-color: var(--cor-background);
+}
+
+
+/* =====================================================================
+   3. TÍTULOS
+   ===================================================================== */
+.titulo-pagina,
+.titulo-secao {
+    color: var(--cor-titulo);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    text-align: center;
+}
+
+
+/* =====================================================================
+   4. PERFIL (foto + nome + apresentação)
+   ===================================================================== */
+#nome {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    margin: 0 0 10px;
+    color: var(--cor-nome);
+}
+
+.texto {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    margin: 0;
+    color: var(--cor-texto);
+    line-height: 1.7;              /* espaço entre as linhas */
+}
+
+/* Caixa branca do perfil. No celular: foto em cima e texto embaixo */
+.perfil-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* A partir de 600px de largura: foto e texto lado a lado */
+@media (min-width: 600px) {
+    .perfil-box {
+        flex-direction: row;
+        gap: 30px;
+    }
+}
+
+.perfil-info {
+    flex: 1;                       /* o texto ocupa o espaço que sobra */
+}
+
+.perfil {
+    width: clamp(120px, 35vw, 200px);
+    aspect-ratio: 1 / 1;           /* mantém a foto quadrada */
+    border-radius: 50%;            /* deixa redonda */
+    object-fit: cover;             /* preenche sem deformar */
+    max-width: 100%;
+    flex-shrink: 0;                /* a foto não encolhe ao lado do texto */
+    border: 4px solid var(--cor-borda-perfil);
+}
+
+
+/* =====================================================================
+   5. CARDS (estilo base)
+   ===================================================================== */
+.cards {
+    display: flex;
+    flex-wrap: wrap;               /* quebra para a linha de baixo se faltar espaço */
+    gap: 20px;                     /* espaço entre os cards */
+    justify-content: center;
+}
+
+.cards > div {
+    color: var(--cor-card-texto);
+    background-color: var(--cor-card-fundo);
+    border: 1px solid var(--cor-card-border);
+    border-top: 6px solid var(--cor-nome);     /* faixa azul no topo */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    flex: 1 1 200px;               /* cresce e encolhe, partindo de 200px */
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;   /* suaviza o efeito de hover */
+}
+
+/* O card sobe um pouquinho quando o mouse passa */
+.cards > div:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cards h3 {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    margin: 0 0 8px;
+}
+
+.cards p {
+    color: var(--cor-card-p);
+    line-height: 1.6;
+    text-align: left;
+}
+
+.cards a {
+    color: inherit;                /* links com a mesma cor do texto */
+}
+
+
+/* =====================================================================
+   6. PORTFÓLIO (imagens dos projetos)
+   ===================================================================== */
+.projeto-img {
+    width: clamp(120px, 35vw, 190px);
+    aspect-ratio: 1 / 1;
+    object-fit: contain;           /* mostra o logo inteiro, sem cortar */
+    max-width: 100%;
+    display: block;
+    margin: 10px auto;             /* centraliza a imagem */
+}
+
+/* ===== PORTFÓLIO: texto que abre ao clicar ===== */
+/* cada card tem a altura do próprio conteúdo: ao abrir um, os outros não esticam */
+.portfolio {
+    align-items: flex-start;
+}
+
+.portfolio summary {
+    cursor: pointer;
+    list-style: none;
+}
+
+.portfolio summary::-webkit-details-marker {
+    display: none;
+}
+
+/* aviso "Clique para ver mais" */
+.dica {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--cor-nome);
+}
+
+
+/* =====================================================================
+   7. HABILIDADES
+   ===================================================================== */
+.habilidades {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 300px));   /* 3 colunas de até 300px */
+    justify-content: center;
+}
+
+/* No celular: um card por linha */
+@media (max-width: 700px) {
+    .habilidades {
+        grid-template-columns: 1fr;
+    }
+}
+
+.habilidades > div {
+    text-align: left;              /* nesta seção o texto fica à esquerda */
+}
+
+/* Linha de cima do card: ícone à esquerda, etiqueta à direita */
+.topo-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.icone {
+    width: 40px;
+    height: 40px;
+}
+
+/* Etiqueta de categoria (Frontend, Dados, Design, Backend) */
+.tag {
+    font-size: 0.75rem;
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-card-border);
+    border-radius: 20px;
+    padding: 3px 12px;
+}
+
+.nivel {
+    margin: 10px 0 6px;
+    font-size: 0.9rem;
+}
+
+/* Barra de nível */
+.barra {
+    height: 8px;
+    background-color: #e8ecfa;
+    border-radius: 10px;
+}
+
+.barra div {
+    height: 100%;
+    background-color: var(--cor-nome);
+    border-radius: 10px;
+}
+
+
+/* =====================================================================
+   8. CONTATO (localização + formulário)
+   ===================================================================== */
+.contato {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 450px));   /* 2 colunas de até 450px */
+    justify-content: center;
+}
+
+/* Cada card vira uma coluna vertical, ocupando a largura toda da sua coluna */
+.contato > div {
+    max-width: none;               /* cancela o limite de 300px da seção 5 */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Nestes cards não há efeito de subir: o mapa e o formulário ficam parados */
+.contato > div:hover {
+    transform: none;
+}
+
+.contato h3 {
+    text-align: center;
+}
+
+/* --- Card de localização --- */
+.card-localizacao p {
+    text-align: center;
+}
+
+/* flex: 1 faz o mapa ocupar o espaço que sobrar no card */
+.card-localizacao iframe {
+    flex: 1;
+    width: 100%;
+    min-height: 300px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* --- Card do formulário --- */
+.card-formulario form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;                     /* espaço entre os campos */
+}
+
+.card-formulario label {
+    font-weight: bold;
+    color: var(--cor-titulo);
+}
+
+.card-formulario input,
+.card-formulario textarea {
+    padding: 10px;
+    border: 1px solid var(--cor-card-border);
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: inherit;          /* usa a mesma fonte do site */
+}
+
+/* A caixa de mensagem cresce para igualar a altura do card ao lado */
+.card-formulario textarea {
+    flex: 1;
+    min-height: 120px;
+    resize: none;
+}
+
+.card-formulario button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--cor-nome);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Mensagem de erro ou sucesso (a cor é definida pelo JavaScript) */
+#resultado {
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* No celular: um card embaixo do outro */
+@media (max-width: 700px) {
+    .contato {
+        grid-template-columns: minmax(0, 500px);
+    }
+}
+
+
+/* =====================================================================
+   9. RODAPÉ
+   ===================================================================== */
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: var(--cor-titulo);   /* azul-marinho */
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
