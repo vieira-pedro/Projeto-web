@@ -3,7 +3,6 @@
 Página de perfil pessoal desenvolvida como atividade acadêmica, reunindo informações sobre mim, projetos de portfólio, habilidades e um formulário de contato. O site é feito com **HTML, CSS e JavaScript**.
 
 **Autor:** Pedro Eduardo da Silva Vieira
-**Repositório:** [github.com/vieira-pedro/Projeto-web](https://github.com/vieira-pedro/Projeto-web)
 
 \---
 
